@@ -116,6 +116,39 @@ tags = sorted(set(tags))
 tags
 
 
+# In[9]:
+
+
+import numpy as np
+from nltk.stem.porter import PorterStemmer
+stemmer = PorterStemmer()
+
+def bag_of_words(tokenized_sentence, all_words):
+    tokenized_sentence = [stemmer.stem(w.lower()) for w in tokenized_sentence]
+
+    bag = np.zeros(len(all_words), dtype=np.float32)
+    for idx, w in enumerate(all_words):
+        if w in tokenized_sentence:
+            bag[idx] = 1.0
+
+    return bag
+
+
+# In[10]:
+
+
+sentence = ['hello', 'how', 'are', 'you']
+words = ['hi', 'hello', 'I', 'you', 'bye', 'thanks', 'cool']
+bag_of_words(sentence, words)
+
+
+# In[11]:
+
+
+X_train = []
+y_train = []
+
+
 # In[ ]:
 
 
